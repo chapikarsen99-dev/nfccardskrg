@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ru" class="pend">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fff7f9">
+<title>Визитка</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Playfair+Display:wght@600;700&family=Unbounded:wght@500;600&family=Lora:wght@600;700&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+:root{--fh:'Playfair Display',Georgia,serif;--fb:'Onest','Segoe UI',system-ui,sans-serif;--fs:30px;--bg:#fff7f9;--accent:#e2557b;--on:#fff;--text:#2b2024;--muted:#8d7c83;--card:#fff;--line:rgba(120,90,100,.16);--r:20px}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--fb);color:var(--text);min-height:100vh;display:flex;justify-content:center;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 16%,var(--bg)) 0,var(--bg) 360px) var(--bg)}
+.page{width:100%;max-width:440px;padding:0 18px calc(48px + env(safe-area-inset-bottom))}
+.head{text-align:center;padding-top:calc(40px + env(safe-area-inset-top))}
+.logo{width:116px;height:116px;border-radius:50%;object-fit:cover;display:block;margin:0 auto;border:4px solid var(--card);box-shadow:0 0 0 2px var(--accent),0 10px 28px color-mix(in srgb,var(--accent) 30%,transparent);background:var(--card);cursor:pointer;-webkit-tap-highlight-color:transparent}
+h1{font-family:var(--fh);font-size:var(--fs);line-height:1.15;margin-top:18px;font-weight:700;letter-spacing:-.01em;overflow-wrap:anywhere}
+.tag{color:var(--muted);font-size:15px;line-height:1.45;margin:8px auto 0;max-width:320px}
+.cta{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:24px;background:var(--cta-bg,#2563c9);color:#fff;padding:18px;border-radius:var(--r);font-weight:700;font-size:18px;text-decoration:none;box-shadow:0 10px 24px color-mix(in srgb,var(--cta-bg,#2563c9) 35%,transparent);min-height:60px}
+.cta[hidden]{display:none}
+.links{display:flex;flex-direction:column;gap:10px;margin-top:18px}
+.btn{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:12px 16px 12px 12px;text-decoration:none;color:inherit;font-weight:600;font-size:16px;transition:transform .15s,border-color .15s}
+.btn:hover{border-color:var(--accent)}
+.btn:active{transform:scale(.98)}
+.ico{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;flex:none}
+.ico svg{width:22px;height:22px}
+.btn small{display:block;font-weight:400;color:var(--muted);font-size:13px;margin-top:1px}
+.btn i{margin-left:auto;color:var(--muted);font-style:normal;font-size:22px}
+.info{margin-top:26px;text-align:center;color:var(--muted);font-size:14px;line-height:1.7;white-space:pre-line}
+button,input,textarea{font-family:inherit}
+html.pend body{visibility:hidden}
+.lf textarea{width:100%;height:150px;margin-top:12px;padding:10px;border:1.5px solid #eadfe3;border-radius:12px;font:13px/1.4 monospace;color:#2b2024;background:#fff}
+button.btn{width:100%;text-align:left;cursor:pointer;color:inherit;font-size:16px}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+/* Владелец */
+.gear{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));width:54px;height:54px;border-radius:50%;border:0;background:var(--text);color:var(--bg);font-size:22px;cursor:pointer;box-shadow:0 8px 22px rgba(0,0,0,.3);z-index:50}
+.gear[hidden],.modal[hidden],.panel[hidden]{display:none}
+.panel{position:fixed;inset:0;background:rgba(20,10,15,.45);z-index:60;display:flex;align-items:flex-end;justify-content:center}
+.sheet{background:#fff;color:#2b2024;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;padding:20px 20px 28px;border-radius:24px 24px 0 0}
+.sheet h3{font-size:19px}
+.sheet h4{font-size:13px;color:#8d7c83;margin:22px 0 10px;font-weight:600}
+.sub{font-size:13px;color:#8d7c83;margin-top:2px}
+.f{margin-bottom:12px}
+.f label{display:block;font-size:13px;font-weight:600;color:#6d5d64;margin-bottom:5px}
+.f input[type=text],.f input[type=url],.f input[type=password],.f textarea{width:100%;padding:11px 13px;border:1.5px solid #eadfe3;border-radius:12px;font:inherit;font-size:15px;background:#fff;color:#2b2024}
+.f textarea{resize:vertical;min-height:64px}
+.row{display:flex;gap:8px;align-items:center}
+.row>input[type=text]{flex:1}
+.fnt{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}.fnt button{padding:12px 8px;border:1.5px solid #eadfe3;border-radius:12px;background:#fff;cursor:pointer;font-size:17px;color:#2b2024}.fnt button.on{border-color:#e2557b;background:#fdf0f4}
+.sw{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.sw button{width:38px;height:38px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1.5px #d8c9cf;cursor:pointer}
+.col{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.col input[type=color]{width:100%;height:46px;padding:4px;border:1.5px solid #eadfe3;border-radius:12px;background:#fff;cursor:pointer}
+.lk{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.lk input[type=checkbox]{width:20px;height:20px;accent-color:#e2557b;flex:none}
+.lk input[type=text]{flex:1;min-width:0;padding:10px 12px;border:1.5px solid #eadfe3;border-radius:12px;font-size:14px}
+.lk span{width:92px;font-size:13px;font-weight:600;flex:none}
+.b{width:100%;padding:14px;border:0;border-radius:14px;font:inherit;font-weight:700;font-size:15px;cursor:pointer;margin-top:8px;background:#2b2024;color:#fff}
+.b.pri{background:#e2557b}.b.ghost{background:#fff;color:#6d5d64;border:1.5px solid #eadfe3}
+.note{background:#f8f1f3;border-radius:14px;padding:13px 14px;font-size:13px;line-height:1.6;margin-top:10px}
+.note img{display:block;margin:10px auto 0;border-radius:10px}
+.modal{position:fixed;inset:0;background:rgba(20,10,15,.55);z-index:80;display:grid;place-items:center;padding:20px}
+.modal .lf{background:#fff;color:#2b2024;border-radius:22px;padding:24px;width:100%;max-width:340px}
+.err{color:#c0392b;font-size:13px;min-height:18px;margin-top:6px}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#2b2024;color:#fff;padding:11px 18px;border-radius:14px;font-size:14px;z-index:90;opacity:0;pointer-events:none;transition:opacity .2s;max-width:90%;text-align:center}
+.toast.on{opacity:1}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<base target="_blank">
+</head>
+<body>
+<main class="page">
+  <header class="head">
+    <img class="logo" id="logo" alt="Логотип">
+    <h1 id="name"></h1>
+    <p class="tag" id="tag"></p>
+  </header>
+  <a class="cta" id="cta" target="_blank" rel="noopener" hidden></a>
+  <nav class="links" id="links"></nav>
+  <p class="info" id="info"></p>
+</main>
+
+<button class="gear" id="gear" hidden aria-label="Настройки">⚙️</button>
+
+<div class="modal" id="lock" hidden>
+  <div class="lf" id="lockForm">
+    <h3 id="lockT">Вход для владельца</h3>
+    <p class="sub" id="lockS"></p>
+    <div class="f" style="margin-top:14px"><input type="password" id="pw" autocomplete="current-password" placeholder="Пароль"></div>
+    <div class="err" id="lockE"></div>
+    <button class="b pri" type="button" id="lockB">Войти</button>
+    <button class="b ghost" type="button" id="lockX">Отмена</button>
+  </div>
+</div>
+
+<div class="modal" id="cp" hidden>
+  <div class="lf">
+    <h3>Скопируйте вручную</h3>
+    <p class="sub">Браузер запретил автокопирование. Нажмите на текст, выделите всё и скопируйте.</p>
+    <textarea id="cpT" readonly></textarea>
+    <button class="b pri" type="button" id="cpX">Готово</button>
+  </div>
+</div>
+
+<div class="panel" id="panel" hidden><div class="sheet" id="sheet"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* Опубликованные настройки. Их видят все посетители. Панель владельца обновляет этот блок при публикации. */
+let PUB=/*CFG*/{"pass":"","name":"Название бизнеса","tag":"Коротко о том, чем вы занимаетесь","logo":"","bg":"#f2f6fb","accent":"#2563c9","ctaColor":"#2563c9","ctaText":"Написать в WhatsApp","font":0,"addr":"Город, улица, дом","hours":"Пн–Вс 09:00–21:00","order":"Здравствуйте! Хочу сделать заказ.","wifi":{"on":true,"name":"Название_сети","pass":"пароль"},"links":{"whatsapp":{"on":true,"val":"77000000000"},"instagram":{"on":true,"val":"@your_business"},"telegram":{"on":true,"val":"@your_business"},"tiktok":{"on":false,"val":""},"menu":{"on":true,"val":"https://example.com/menu"},"gis":{"on":true,"val":"https://2gis.kz/"},"site":{"on":false,"val":""},"phone":{"on":true,"val":"+7 700 000-00-00"}}}/*END*/;
+
+const $=s=>document.querySelector(s);
+const dig=s=>String(s||'').replace(/\D/g,'');
+const clone=o=>JSON.parse(JSON.stringify(o));
+const TPL=clone(PUB);
+const url=(v,b)=>{v=(v||'').trim();if(!v)return'';return/^https?:\/\//i.test(v)?v:b+v.replace(/^@/,'').replace(/^\/+/,'')};
+const safe=u=>/^(https?:|tel:)/i.test(u)?u:'';
+const svg=(p,f)=>`<svg viewBox="0 0 24 24" ${f?'fill="#fff"':'fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"'}>${p}</svg>`;
+const LD=[
+ {k:'whatsapp',t:'WhatsApp',s:'Написать в чат',c:'#25d366',ph:'77001234567',f:v=>dig(v)?'https://wa.me/'+dig(v):'',i:svg('<path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm5 13.9c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .3-3.4-.7-2.9-1.2-4.7-4.1-4.9-4.3-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5s.8 1.9.8 2c.1.1.1.3 0 .5l-.4.6c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1.1 2.2 1.4 2.5 1.5.3.2.5.1.7-.1l.9-1.1c.2-.3.4-.2.7-.1l1.9.9c.3.2.5.3.6.4 0 .1 0 .6-.1 1.1z"/>',1)},
+ {k:'instagram',t:'Instagram',s:'Фото и новости',c:'linear-gradient(135deg,#f58529,#dd2a7b,#8134af)',ph:'@username или ссылка',f:v=>url(v,'https://instagram.com/'),i:svg('<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#fff"/>')},
+ {k:'telegram',t:'Telegram',s:'Канал и чат',c:'#2aabee',ph:'@username или ссылка',f:v=>url(v,'https://t.me/'),i:svg('<path d="M21.9 4.6 19 19.3c-.2 1-.8 1.2-1.6.8l-4.6-3.4-2.2 2.1c-.3.3-.5.5-1 .5l.3-4.6L18.5 7c.4-.3-.1-.5-.6-.2L7.6 13.2 3.2 11.8c-1-.3-1-1 .2-1.4l17.6-6.8c.8-.3 1.5.2 1.4.9z"/>',1)},
+ {k:'tiktok',t:'TikTok',s:'Наши видео',c:'#111',ph:'@username или ссылка',f:v=>url(v,'https://tiktok.com/@'),i:svg('<path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5M14 3c.3 2.5 2 4.2 4.5 4.5"/>')},
+ {k:'menu',t:'Меню и каталог',s:'Смотреть онлайн',c:'var(--accent)',ph:'Ссылка на меню, каталог или PDF',f:v=>url(v,'https://'),i:svg('<path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/>')},
+ {k:'gis',t:'2GIS',s:'Мы на карте',c:'linear-gradient(135deg,#ff7a45,#f5b301)',ph:'Ссылка на карточку',f:v=>url(v,'https://'),i:svg('<path d="M12 21s-7-5.8-7-11a7 7 0 0 1 14 0c0 5.2-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>')},
+ {k:'site',t:'Сайт',s:'Открыть сайт',c:'#5b6b7a',ph:'https://...',f:v=>url(v,'https://'),i:svg('<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>')},
+ {k:'phone',t:'Позвонить',s:'',c:'#3a3a3a',ph:'+7 700 000-00-00',f:v=>dig(v)?'tel:+'+dig(v):'',i:svg('<path d="M6.6 10.8a15.9 15.9 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/>',1)}
+];
+const WIFI=svg('<path d="M2 9a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0"/><circle cx="12" cy="19.5" r="1" fill="#fff"/>');
+const FONTS=[['Элегантный',"'Playfair Display',Georgia,serif",'30px',"'Onest','Segoe UI',sans-serif"],['Современный',"'Unbounded','Onest',sans-serif",'22px',"'Onest','Segoe UI',sans-serif"],['Классика',"'Lora',Georgia,serif",'29px',"'Manrope','Segoe UI',sans-serif"],['Строгий',"'Manrope','Segoe UI',sans-serif",'28px',"'Manrope','Segoe UI',sans-serif"]];
+const THEMES=[['#fff7f9','#e2557b'],['#f6f3ff','#6d4ce0'],['#f1f8f4','#1f8a5b'],['#fffaf0','#e08a1e'],['#f2f6fb','#2563c9'],['#161216','#ff6b8b']];
+
+/* Цвета */
+const h2r=h=>{h=h.replace('#','');if(h.length==3)h=h.split('').map(x=>x+x).join('');return[0,2,4].map(i=>parseInt(h.substr(i,2),16))};
+const mix=(a,b,t)=>{const A=h2r(a),B=h2r(b);return'#'+A.map((x,i)=>Math.round(x*(1-t)+B[i]*t).toString(16).padStart(2,'0')).join('')};
+const lum=h=>{const[r,g,b]=h2r(h);return(.299*r+.587*g+.114*b)/255};
+
+/* Состояние */
+const DK='nfc_draft_v2';
+const ss=f=>{try{return f()}catch(e){}};
+let admin=ss(()=>sessionStorage.getItem('nfc_adm'))==='1';
+let C=clone(PUB);
+if(admin){try{C=JSON.parse(localStorage.getItem(DK))||clone(PUB)}catch(e){}}
+const saveDraft=()=>{try{localStorage.setItem(DK,JSON.stringify(C))}catch(e){toast('Не удалось сохранить черновик')}};
+
+function render(){
+  C.wifi=C.wifi||{on:false,name:'',pass:''};
+  const dark=lum(C.bg)<.45,text=dark?'#f6eef1':'#2b2024',r=document.documentElement.style;
+  r.setProperty('--bg',C.bg);r.setProperty('--accent',C.accent);r.setProperty('--cta-bg',C.ctaColor||'#2563c9');r.setProperty('--text',text);
+  r.setProperty('--muted',mix(text,C.bg,.45));r.setProperty('--card',dark?mix(C.bg,'#ffffff',.09):'#ffffff');
+  r.setProperty('--on',lum(C.accent)>.7?'#2b2024':'#ffffff');
+  const F=FONTS[C.font|0]||FONTS[0];r.setProperty('--fh',F[1]);r.setProperty('--fs',F[2]);r.setProperty('--fb',F[3]);
+  document.querySelector('meta[name=theme-color]').content=C.bg;
+  document.title=C.name||'Визитка';
+  $('#name').textContent=C.name;$('#tag').textContent=C.tag;
+  $('#logo').src=C.logo||'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="116" height="116"><rect width="116" height="116" fill="'+mix(C.bg,C.accent,.15)+'"/><text x="58" y="76" font-size="50" font-weight="700" font-family="sans-serif" text-anchor="middle" fill="'+C.accent+'">'+((C.name||'?').trim().charAt(0).toUpperCase().replace(/[<>&"]/g,''))+'</text></svg>');
+  $('#info').textContent=[C.addr,C.hours].filter(Boolean).join('\n');
+  const L=C.links,wa=L.whatsapp.on&&LD[0].f(L.whatsapp.val),ph=L.phone.on&&LD[7].f(L.phone.val);
+  const cta=$('#cta');
+  if(wa){cta.href=wa+'?text='+encodeURIComponent(C.order||'');cta.textContent=C.ctaText||'Заказать в WhatsApp'}
+  else if(ph){cta.href=ph;cta.textContent=C.ctaText||'Позвонить и заказать'}
+  cta.hidden=!(wa||ph);
+  const nav=$('#links');nav.textContent='';
+  LD.forEach(d=>{
+    const o=L[d.k];if(!o||!o.on)return;const h=safe(d.f(o.val));if(!h)return;
+    const a=document.createElement('a');a.className='btn';a.href=h;if(!h.startsWith('tel:')){a.target='_blank';a.rel='noopener'}
+    a.innerHTML='<span class="ico"></span><span><b></b><small></small></span><i>›</i>';
+    const ic=a.querySelector('.ico');ic.style.background=d.c;ic.innerHTML=d.i;
+    a.querySelector('b').textContent=d.t;a.querySelector('small').textContent=d.k==='phone'?o.val:d.s;
+    nav.appendChild(a);
+  });
+  const w=C.wifi;
+  if(w.on&&w.name){
+    const b=document.createElement('button');b.type='button';b.className='btn';
+    b.innerHTML='<span class="ico"></span><span><b></b><small></small></span><i></i>';
+    const ic=b.querySelector('.ico');ic.style.background='#4a5568';ic.innerHTML=WIFI;
+    b.querySelector('b').textContent='Wi-Fi: '+w.name;
+    b.querySelector('small').textContent=w.pass?'Пароль: '+w.pass:'Открытая сеть';
+    if(w.pass){b.querySelector('i').style.cssText='font-size:13px';b.querySelector('i').textContent='Копировать';b.onclick=()=>copyText(w.pass,'Пароль скопирован')}
+    nav.appendChild(b);
+  }
+}
+
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('on'),2600)}
+
+/* Вход владельца */
+async function sha(s){
+  if(crypto&&crypto.subtle){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('nfc:'+s));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}
+  let h=5381;for(const c of 'nfc:'+s)h=(h*33^c.charCodeAt(0))>>>0;return'x'+h
+}
+let draftPass='';try{const _d=JSON.parse(localStorage.getItem(DK))||{};if(_d.pass){delete _d.pass;localStorage.setItem(DK,JSON.stringify(_d));sessionStorage.removeItem('nfc_adm')}}catch(e){}
+const storedPass=()=>PUB.pass||draftPass;
+function showLock(){
+  const setup=!storedPass();
+  $('#lockT').textContent=setup?'Создайте пароль':'Вход для владельца';
+  $('#lockS').textContent=setup?'Он понадобится, чтобы открывать редактор. Минимум 4 символа.':'Введите пароль, чтобы изменить визитку.';
+  $('#lockB').textContent=setup?'Создать пароль':'Войти';
+  $('#pw').value='';$('#lockE').textContent='';$('#lock').hidden=false;$('#pw').focus();
+}
+$('#lockX').onclick=()=>{$('#lock').hidden=true;try{if(location.hash==='#admin')history.replaceState(null,'',location.pathname+location.search)}catch(e){}};
+async function doLock(){try{
+  const v=$('#pw').value,h=await sha(v);
+  if(!storedPass()){
+    if(v.length<4){$('#lockE').textContent='Пароль короче 4 символов.';return}
+    C.pass=h;draftPass=h;saveDraft();
+  }else if(h!==storedPass()){$('#lockE').textContent='Неверный пароль.';return}
+  admin=true;ss(()=>sessionStorage.setItem('nfc_adm','1'));
+  try{C=JSON.parse(localStorage.getItem(DK))||clone(PUB)}catch(e){C=clone(PUB)}
+  C.pass=C.pass||storedPass();
+  $('#lock').hidden=true;try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}
+  startAdmin();openPanel();
+}catch(err){$('#lockE').textContent='Ошибка: '+(err&&err.message||err)}}
+$('#lockB').onclick=doLock;
+$('#pw').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();doLock()}};
+let taps=0,tapT;
+$('#logo').onclick=()=>{taps++;clearTimeout(tapT);tapT=setTimeout(()=>taps=0,1500);if(taps>=5){taps=0;
+  if(admin){admin=false;ss(()=>sessionStorage.removeItem('nfc_adm'));$('#gear').hidden=true;$('#panel').hidden=true;$('#lock').hidden=true;try{if(location.hash==='#admin')history.replaceState(null,'',location.pathname+location.search)}catch(e){}C=clone(PUB);render();toast('Режим владельца выключен')}
+  else showLock()}};
+if(location.hash==='#admin'&&!admin)showLock();
+
+/* Редактор */
+function startAdmin(){$('#gear').hidden=false;render()}
+$('#gear').onclick=openPanel;
+$('#panel').onclick=e=>{if(e.target.id==='panel')$('#panel').hidden=true};
+const val=id=>(C[id]??'');
+
+function openPanel(){
+  const s=$('#sheet');
+  s.innerHTML=`
+  <h3>Редактор визитки</h3><p class="sub">Режим владельца. Изменения видны только вам, пока вы не опубликуете их.</p>
+  <h4>Основное</h4>
+  <div class="f"><label>Название</label><input type="text" data-k="name"></div>
+  <div class="f"><label>Описание</label><textarea data-k="tag"></textarea></div>
+  <div class="f"><label>Логотип</label><div class="row"><input type="text" data-k="logo" placeholder="Ссылка на изображение"><button class="b ghost" style="width:auto;margin:0;padding:11px 14px" id="up">Загрузить</button></div><input type="file" id="file" accept="image/*" hidden></div>
+  <div class="f"><label>Адрес</label><input type="text" data-k="addr"></div>
+  <div class="f"><label>Часы работы</label><input type="text" data-k="hours"></div>
+  <div class="f"><label>Сообщение для заказа в WhatsApp</label><input type="text" data-k="order"></div>
+  <h4>Большая кнопка WhatsApp</h4>
+  <div class="f"><label>Текст на большой кнопке</label><input type="text" data-k="ctaText" placeholder="Написать в WhatsApp"></div>
+  <div class="f"><label>Цвет большой кнопки</label><input type="color" data-k="ctaColor"></div>
+  <p class="sub" style="margin:-4px 0 14px">Кнопка ведёт на WhatsApp по номеру, указанному ниже.</p>
+  <h4>Кнопки и ссылки</h4>
+  ${LD.map(d=>`<div class="lk"><input type="checkbox" data-lo="${d.k}" aria-label="${d.t}"><span>${d.t}</span><input type="text" data-lv="${d.k}" placeholder="${d.ph}"></div>`).join('')}
+  <h4>Wi-Fi для гостей</h4>
+  <div class="lk"><input type="checkbox" data-w="on" aria-label="Показывать Wi-Fi"><span>Показывать</span><input type="text" data-w="name" placeholder="Название сети"></div>
+  <div class="lk"><span style="margin-left:30px">Пароль</span><input type="text" data-w="pass" placeholder="Пароль сети"></div>
+  <h4>Шрифт</h4>
+  <div class="fnt">${FONTS.map((f,i)=>`<button data-fn="${i}"><span style="font-family:${f[1]}">${f[0]}</span></button>`).join('')}</div>
+  <h4>Цвета</h4>
+  <div class="sw">${THEMES.map((t,i)=>`<button data-th="${i}" aria-label="Тема ${i+1}" style="background:linear-gradient(135deg,${t[0]} 50%,${t[1]} 50%)"></button>`).join('')}</div>
+  <div class="col"><div class="f"><label>Фон</label><input type="color" data-k="bg"></div><div class="f"><label>Акцент</label><input type="color" data-k="accent"></div></div>
+  <h4>Публикация</h4>
+  <button class="b pri" id="pub">Скачать config.json</button>
+  <button class="b ghost" id="cpy">Не скачивается? Скопировать текст</button>
+  <button class="b ghost" id="cpl">Скопировать ссылку на визитку</button>
+  <div class="note">Чтобы посетители увидели изменения, скачайте config.json и загрузите его на хостинг в ту же папку, где лежит index.html (с заменой старого). NFC-карту перезаписывать не нужно, ссылка остаётся прежней. Если файл не скачивается, скопируйте текст и сохраните его в файл с именем config.json.<span id="qr"></span></div>
+  <h4>Аккаунт</h4>
+  <button class="b ghost" id="rt">Сбросить к чистому шаблону</button>
+  <button class="b ghost" id="rst">Отменить черновик</button>
+  <button class="b ghost" id="out">Выйти</button>
+  <button class="b" id="cls">Закрыть</button>`;
+  s.querySelectorAll('[data-k]').forEach(i=>i.value=val(i.dataset.k));
+  {const lg=s.querySelector('[data-k=logo]');if(lg&&String(C.logo||'').length>200)lg.value='(загружено с устройства)'}
+  s.querySelectorAll('[data-lo]').forEach(i=>i.checked=C.links[i.dataset.lo].on);
+  s.querySelectorAll('[data-lv]').forEach(i=>i.value=C.links[i.dataset.lv].val);
+  s.querySelectorAll('[data-w]').forEach(i=>{const v=C.wifi[i.dataset.w];if(i.type==='checkbox')i.checked=!!v;else i.value=v||''});
+  const ch=e=>{const t=e.target;
+    if(t.dataset.k)C[t.dataset.k]=t.value;
+    else if(t.dataset.lo)C.links[t.dataset.lo].on=t.checked;
+    else if(t.dataset.lv){C.links[t.dataset.lv].val=t.value;if(t.value.trim()){C.links[t.dataset.lv].on=true;s.querySelector(`[data-lo=${t.dataset.lv}]`).checked=true}}
+    else if(t.dataset.w){C.wifi[t.dataset.w]=t.type==='checkbox'?t.checked:t.value}
+    else return;saveDraft();render()};
+  s.oninput=ch;s.onchange=ch;
+  s.querySelectorAll('[data-th]').forEach(b=>b.onclick=()=>{const t=THEMES[b.dataset.th];C.bg=t[0];C.accent=t[1];s.querySelector('[data-k=bg]').value=t[0];s.querySelector('[data-k=accent]').value=t[1];saveDraft();render()});
+  const mark=()=>s.querySelectorAll('[data-fn]').forEach(b=>b.classList.toggle('on',+b.dataset.fn===(C.font|0)));mark();
+  s.querySelectorAll('[data-fn]').forEach(b=>b.onclick=()=>{C.font=+b.dataset.fn;saveDraft();render();mark()});
+  $('#up').onclick=()=>$('#file').click();
+  $('#file').onchange=e=>{const f=e.target.files[0];if(!f)return;const im=new Image(),u=URL.createObjectURL(f);
+    im.onload=()=>{const c=document.createElement('canvas'),z=300,m=Math.min(im.width,im.height);c.width=c.height=z;
+      c.getContext('2d').drawImage(im,(im.width-m)/2,(im.height-m)/2,m,m,0,0,z,z);
+      C.logo=c.toDataURL('image/jpeg',.85);s.querySelector('[data-k=logo]').value='(загружено с устройства)';saveDraft();render();URL.revokeObjectURL(u)};
+    im.src=u};
+  $('#pub').onclick=publish;
+  $('#cpy').onclick=()=>copyText(JSON.stringify(C,null,1),'Настройки скопированы');
+  $('#cpl').onclick=()=>copyText(location.href.split('#')[0].split('?')[0],'Ссылка скопирована');
+  $('#rt').onclick=()=>{if(confirm('Сбросить все тексты, ссылки и цвета к шаблону?')){C=clone(TPL);C.pass=storedPass();saveDraft();render();openPanel()}};
+  $('#rst').onclick=()=>{if(confirm('Вернуть опубликованную версию?')){C=clone(PUB);C.pass=storedPass();saveDraft();render();openPanel()}};
+  $('#out').onclick=()=>{ss(()=>sessionStorage.removeItem('nfc_adm'));location.reload()};
+  $('#cls').onclick=()=>$('#panel').hidden=true;
+  const u=location.href.split('#')[0].split('?')[0];
+  $('#qr').innerHTML='<br><br>Ссылка визитки: <b></b><img alt="QR-код" width="160" height="160" src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data='+encodeURIComponent(u)+'">';
+  $('#qr b').textContent=u;
+  $('#panel').hidden=false;
+}
+
+function copyText(t,msg){
+  const manual=()=>{$('#cpT').value=t;$('#cp').hidden=false;$('#cpT').focus();$('#cpT').select()};
+  const legacy=()=>{try{const a=document.createElement('textarea');a.value=t;a.style.cssText='position:fixed;top:0;opacity:0';document.body.appendChild(a);a.focus();a.select();a.setSelectionRange(0,t.length);const ok=document.execCommand('copy');a.remove();return ok}catch(e){return false}};
+  if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(t).then(()=>toast(msg),()=>legacy()?toast(msg):manual());
+  else legacy()?toast(msg):manual();
+}
+$('#cpX').onclick=()=>$('#cp').hidden=true;
+
+function publish(){
+  const out=clone(C);out.pass=storedPass();const txt=JSON.stringify(out,null,1);
+  try{
+    const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([txt],{type:'application/json'}));a.download='config.json';
+    document.body.appendChild(a);a.click();a.remove();toast('config.json скачан. Загрузите его на хостинг');
+  }catch(e){copyText(txt,'Настройки скопированы')}
+}
+
+/* Опубликованные настройки лежат в config.json рядом с index.html */
+function load(){
+  const done=()=>document.documentElement.classList.remove('pend');
+  setTimeout(done,2000);
+  fetch('config.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{
+    if(j&&j.links){
+      PUB=Object.assign(clone(PUB),j);
+      if(admin){try{C=JSON.parse(localStorage.getItem(DK))||clone(PUB)}catch(e){C=clone(PUB)}}else C=clone(PUB);
+      render();
+    }
+  }).catch(()=>{}).then(done);
+}
+
+render();
+if(admin)startAdmin();
+load();
+</script>
+</body>
+</html>
